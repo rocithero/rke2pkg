@@ -1,0 +1,117 @@
+{
+ "files": [
+  {
+   "format": 1, 
+   "ftype": "dir", 
+   "chksum_sha256": null, 
+   "name": ".", 
+   "chksum_type": null
+  }, 
+  {
+   "ftype": "dir", 
+   "chksum_sha256": null, 
+   "name": "roles", 
+   "chksum_type": null, 
+   "format": 1
+  }, 
+  {
+   "ftype": "dir", 
+   "chksum_sha256": null, 
+   "name": "roles/template", 
+   "chksum_type": null, 
+   "format": 1
+  }, 
+  {
+   "ftype": "dir", 
+   "chksum_sha256": null, 
+   "name": "roles/template/meta", 
+   "chksum_type": null, 
+   "format": 1
+  }, 
+  {
+   "ftype": "file", 
+   "chksum_sha256": "542405d4e07e721d6ffe0abeadb63160c974557d0e1ca3caed60672333c66ad9", 
+   "name": "roles/template/meta/main.yml", 
+   "chksum_type": "sha256", 
+   "format": 1
+  }, 
+  {
+   "ftype": "dir", 
+   "chksum_sha256": null, 
+   "name": "roles/template/templates", 
+   "chksum_type": null, 
+   "format": 1
+  }, 
+  {
+   "ftype": "file", 
+   "chksum_sha256": "a7b08a9326f7dd8d9a0512cae918f1903a44a55f24e2cf62b8478316fbbc8254", 
+   "name": "roles/template/templates/show_vlan.template", 
+   "chksum_type": "sha256", 
+   "format": 1
+  }, 
+  {
+   "ftype": "dir", 
+   "chksum_sha256": null, 
+   "name": "roles/template/tasks", 
+   "chksum_type": null, 
+   "format": 1
+  }, 
+  {
+   "ftype": "file", 
+   "chksum_sha256": "981044f057b67c5de741eff57f602793b958c459ea48bcb764bdec9db7d2c932", 
+   "name": "roles/template/tasks/show_vlan.yaml", 
+   "chksum_type": "sha256", 
+   "format": 1
+  }, 
+  {
+   "ftype": "file", 
+   "chksum_sha256": "a02caff5c1c5628d90b4074550fe37815188097dc8887ecece6053e9bf38c44e", 
+   "name": "roles/template/tasks/main.yml", 
+   "chksum_type": "sha256", 
+   "format": 1
+  }, 
+  {
+   "ftype": "file", 
+   "chksum_sha256": "a76b1f05772eafab2d95e4bc644a314d97a6a727d7ccb85cce45372081e3c98f", 
+   "name": "roles/template/tasks/textfsm.yaml", 
+   "chksum_type": "sha256", 
+   "format": 1
+  }, 
+  {
+   "ftype": "dir", 
+   "chksum_sha256": null, 
+   "name": "plugins", 
+   "chksum_type": null, 
+   "format": 1
+  }, 
+  {
+   "ftype": "dir", 
+   "chksum_sha256": null, 
+   "name": "plugins/action", 
+   "chksum_type": null, 
+   "format": 1
+  }, 
+  {
+   "ftype": "file", 
+   "chksum_sha256": "7568a3fa3f1d3b9bc96381dc812347269d99c9c2049c83d303fb3d4c9cbb2eb2", 
+   "name": "plugins/action/textfsm_parser.py", 
+   "chksum_type": "sha256", 
+   "format": 1
+  }, 
+  {
+   "ftype": "file", 
+   "chksum_sha256": "3ee87cf3e2971ef29a05001122f288dc649cc934f0edd4ca9686cd7d75128ab7", 
+   "name": "sindhuparvathi_gopi-ansible_collection_dellos_template-1.0.2.tar.gz", 
+   "chksum_type": "sha256", 
+   "format": 1
+  }, 
+  {
+   "ftype": "file", 
+   "chksum_sha256": "7b35d610f9ef6f2b68165af8ed538244d2f23a8adbb072c0be8ae605a984bb4f", 
+   "name": "README.md", 
+   "chksum_type": "sha256", 
+   "format": 1
+  }
+ ], 
+ "format": 1
+}

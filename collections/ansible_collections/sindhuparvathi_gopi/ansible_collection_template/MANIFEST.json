@@ -1,0 +1,32 @@
+{
+ "collection_info": {
+  "description": "The ansible_collection_template provides access to structured data from show commands", 
+  "repository": "http://example.com/repository", 
+  "tags": [
+   "networking"
+  ], 
+  "dependencies": null, 
+  "authors": [
+   "sindhu"
+  ], 
+  "issues": "http://example.com/issue/tracker", 
+  "name": "ansible_collection_template", 
+  "license": [
+   "GPL-2.0-or-later"
+  ], 
+  "documentation": "http://docs.example.com", 
+  "namespace": "sindhuparvathi_gopi", 
+  "version": "1.0.2", 
+  "readme": "README.md", 
+  "license_file": null, 
+  "homepage": "http://example.com"
+ }, 
+ "file_manifest_file": {
+  "format": 1, 
+  "ftype": "file", 
+  "chksum_sha256": "dcdfd692b400bd898683ad32954b121878cf4ac57b5cd7b904593251baa14bc4", 
+  "name": "FILES.json", 
+  "chksum_type": "sha256"
+ }, 
+ "format": 1
+}
