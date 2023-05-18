@@ -202,3 +202,52 @@ resource "aws_iam_role_policy" "example" {
 In this modified code, we create a new `aws_iam_policy_document` called `combined_policy` that contains a single statement. The statement includes both principals: the EC2 service principal and the specific AWS IAM role principal. The effect and actions remain the same.
 
 The resulting policy document will have a single statement that includes both principals within the `principals` block.
+
+
+
+### OPTION 4 FIX STATEMRNTS
+Apologies for the confusion. The syntax error you're encountering is because the `data "aws_iam_policy_document" "combined_policy"` block does not support the `statement` block directly. Instead, you can use the `statements` argument to define multiple statements within the policy document.
+
+Here's the corrected code:
+
+```hcl
+module "my_iam_role" {
+  source = "./my_iam_role_module"
+  name   = "my-iam-role"
+}
+
+data "aws_iam_policy_document" "combined_policy" {
+  statement {
+    effect = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
+
+  statement {
+    effect = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::123456789012:role/other-role"]
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "example" {
+  role   = module.my_iam_role.role_name
+
+  policy = jsonencode({
+    Version   = "2012-10-17"
+    Statement = data.aws_iam_policy_document.combined_policy.statements
+  })
+}
+```
+
+In this updated code, the `data "aws_iam_policy_document" "combined_policy"` block includes two separate `statement` blocks to define two individual statements. The `statements` argument is used in the `aws_iam_role_policy` resource to refer to the list of statements within the combined policy document.
+
+Please give this updated code a try, and it should resolve the syntax errors you were facing.
