@@ -159,3 +159,46 @@ In the `aws_iam_role_policy` resource, we use the `jsonencode` function to encod
 By using `concat`, we combine the statements from both policy documents into a single list of statements, effectively appending the new statement to the existing trust policy.
 
 Make sure to replace the values in the example with your own IAM role name and ARN as needed. When you apply this configuration, it will update the trust policy of the IAM role within the module by appending the new statement to the existing policy.
+
+
+
+
+### OPTON 4
+If you want to combine the two principals into a single statement, you can modify the code as follows:
+
+```hcl
+module "my_iam_role" {
+  source = "./my_iam_role_module"
+  name   = "my-iam-role"
+}
+
+data "aws_iam_policy_document" "combined_policy" {
+  statement {
+    effect = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::123456789012:role/other-role"]
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "example" {
+  role   = module.my_iam_role.role_name
+
+  policy = jsonencode({
+    Version   = "2012-10-17"
+    Statement = data.aws_iam_policy_document.combined_policy.statement
+  })
+}
+```
+
+In this modified code, we create a new `aws_iam_policy_document` called `combined_policy` that contains a single statement. The statement includes both principals: the EC2 service principal and the specific AWS IAM role principal. The effect and actions remain the same.
+
+The resulting policy document will have a single statement that includes both principals within the `principals` block.
