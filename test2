@@ -1,0 +1,53 @@
+## call module with idenfier
+Apologies for the confusion. No, `jsonencode` is not required when providing the assume role policy as a JSON string. You can directly pass the assume role policy as a string without using `jsonencode`.
+
+Here's the updated code without `jsonencode`:
+
+1. In your module, update the input variable for `assume_role_policy`:
+
+   ```terraform
+   variable "assume_role_policy" {
+     description = "The assume role policy document."
+     type        = string
+   }
+   ```
+
+2. In the module, update the `aws_iam_role` resource to include the assume role policy:
+
+   ```terraform
+   resource "aws_iam_role" "example_role" {
+     name               = "example-role"
+     assume_role_policy = var.assume_role_policy
+     # Other role configuration...
+   }
+   ```
+
+3. When calling the module, provide the assume role policy as a JSON string:
+
+   ```terraform
+   module "my_iam_role" {
+     source             = "./iam_role_module"
+     assume_role_policy = <<EOF
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Principal": {
+           "Service": "ec2.amazonaws.com"
+         },
+         "Action": "sts:AssumeRole",
+         "Condition": {
+           "StringEquals": {
+             "sts:ExternalId": "unique-identifier-value"
+           }
+         }
+       }
+     ]
+   }
+   EOF
+     # Other module configuration...
+   }
+   ```
+
+By directly passing the assume role policy as a JSON string, you can achieve the desired result without using `jsonencode`.
