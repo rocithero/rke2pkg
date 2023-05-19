@@ -1,0 +1,35 @@
+log4j.logger.org.apache.flink.runtime.blob.BlobClient=DEBUG
+
+
+
+To enable logging for the Flink upload process in a Ververica session cluster, you can modify the log configuration of the Flink components. Here's how you can do it:
+
+1. Access the Ververica Platform UI or connect to the cluster's machine where the Flink components are running.
+
+2. Locate the Flink configuration file. It is usually located in the `conf` directory of your Flink installation.
+
+3. Open the Flink configuration file in a text editor (e.g., `flink-conf.yaml`).
+
+4. Look for the `log4j.properties` or `logback.xml` section in the configuration file. The exact name may vary depending on the Flink version and configuration.
+
+5. Modify the logging configuration to increase the log level for the Flink upload process. You can set it to `DEBUG` or `TRACE` to enable more detailed logging. For example, you can add or modify the following line in the logging configuration:
+
+   For log4j.properties:
+   ```properties
+   log4j.logger.org.apache.flink.runtime.blob.BlobClient=DEBUG
+   ```
+
+   For logback.xml:
+   ```xml
+   <logger name="org.apache.flink.runtime.blob.BlobClient" level="DEBUG" />
+   ```
+
+   This configuration will enable debug-level logging for the Flink BlobClient, which is responsible for handling the upload process.
+
+6. Save the changes to the configuration file.
+
+7. Restart the Flink components, including the Job Manager and Task Managers, for the new logging configuration to take effect.
+
+After enabling the debug-level logging for the Flink upload process, you should see more detailed log messages related to the upload activities. This can help you debug any potential issues or errors encountered during the upload process.
+
+Please note that modifying the log configuration requires appropriate access and permissions on the cluster machine. If you are not the administrator of the session cluster, consult with your cluster administrator or the Ververica support team for assistance in enabling debug-level logging for the upload process.
