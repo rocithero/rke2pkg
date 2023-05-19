@@ -251,3 +251,45 @@ resource "aws_iam_role_policy" "example" {
 In this updated code, the `data "aws_iam_policy_document" "combined_policy"` block includes two separate `statement` blocks to define two individual statements. The `statements` argument is used in the `aws_iam_role_policy` resource to refer to the list of statements within the combined policy document.
 
 Please give this updated code a try, and it should resolve the syntax errors you were facing.
+
+
+
+
+### OPTION 6
+Apologies for the confusion in my previous response. If you want to create an IAM role with its own ARN as a principal in the assume role policy, you cannot use the same IAM role resource to create and reference itself in the policy. It creates a cyclic dependency, which is not allowed in Terraform.
+
+To achieve this, you can create the IAM role without specifying the assume role policy initially, and then use a separate `aws_iam_role_policy` resource to attach the assume role policy with multiple statements, including the IAM role's own ARN. Here's an example:
+
+```hcl
+resource "aws_iam_role" "example_role" {
+  name = "example-role"
+}
+
+resource "aws_iam_role_policy" "example_policy" {
+  name   = "example-policy"
+  role   = aws_iam_role.example_role.name
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "ec2.amazonaws.com"
+        },
+        "Action": "sts:AssumeRole"
+      },
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": aws_iam_role.example_role.arn
+        },
+        "Action": "sts:AssumeRole"
+      }
+    ]
+  })
+}
+```
+
+In this example, the `aws_iam_role` resource creates the IAM role named "example-role" without specifying the assume role policy. Then, the `aws_iam_role_policy` resource attaches the assume role policy to the IAM role using the `role` attribute and includes the IAM role's own ARN as a principal in the policy document.
+
+By separating the IAM role creation and assume role policy attachment into two resources, you can avoid the cyclic dependency issue.
