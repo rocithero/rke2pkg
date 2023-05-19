@@ -1,0 +1,31 @@
+Apologies for the confusion. When using the AWS CLI to assume a role and interact with AWS services, you should provide the ARN (Amazon Resource Name) of the IAM role, not the AWS CLI profile.
+
+To assume a role and list S3 buckets using the AWS CLI, you can use the following command:
+
+```shell
+aws sts assume-role --role-arn <role_arn> --role-session-name <session_name> --query 'Credentials.[AccessKeyId, SecretAccessKey, SessionToken]' --output text | awk '{ printf("export AWS_ACCESS_KEY_ID=%s\nexport AWS_SECRET_ACCESS_KEY=%s\nexport AWS_SESSION_TOKEN=%s\n", $1, $2, $3) }' > assumed-role.env
+```
+
+Replace `<role_arn>` with the ARN of the IAM role you want to assume. You can find the ARN of the IAM role in the AWS Management Console or by using the AWS CLI `aws iam list-roles` command.
+
+Replace `<session_name>` with a unique name for the session. This can be any string that helps identify the purpose of the session.
+
+This command uses the `aws sts assume-role` command to assume the specified IAM role and retrieve temporary credentials. It then exports these credentials into an environment file named `assumed-role.env`.
+
+After running the above command, you can load the temporary credentials into your current shell session using the following command:
+
+```shell
+source assumed-role.env
+```
+
+This will set the necessary environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) to use the assumed role credentials.
+
+Once the credentials are loaded, you can use the `aws s3 ls` command to list S3 buckets:
+
+```shell
+aws s3 ls s3:// --region <region>
+```
+
+Replace `<region>` with the appropriate AWS region where your S3 buckets are located.
+
+Please note that the above commands assume you are running them in a Unix-like shell environment. If you are using a different shell or operating system, the commands may need to be adjusted accordingly.
