@@ -9,3 +9,12 @@
       """
     )
   }
+
+
+  parameters {
+    choice(
+      name: 'MY_PARAM',
+      choices: (1..99).collect { it.toString() },
+      description: 'Select a value between 1 and 99'
+    )
+  }
