@@ -1,0 +1,11 @@
+  parameters {
+    extendedChoice(
+      name: 'MY_PARAM',
+      description: 'Select a value between 1 and 99',
+      type: 'PT_SINGLE_SELECT',
+      groovyScript: """
+        def range = (1..99).collect { it.toString() }
+        return range
+      """
+    )
+  }
