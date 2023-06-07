@@ -18,3 +18,26 @@
       description: 'Select a value between 1 and 99'
     )
   }
+
+
+  parameters {
+    extendedChoice(
+      name: 'MY_PARAM',
+      description: 'Select a value between 1 and 99',
+      type: 'PT_SINGLE_SELECT',
+      choices: (1..99).collect { it.toString() }
+    )
+  }
+  
+  
+  
+    parameters {
+    extendedChoice(
+      name: 'MY_PARAM',
+      description: 'Select a value between 1 and 99',
+      type: 'PT_SINGLE_SELECT',
+      script: {
+        return (1..99).collect { it.toString() }
+      }
+    )
+  }
