@@ -41,3 +41,16 @@
       }
     )
   }
+  
+  
+  
+    parameters {
+    choice(
+      choices: '1-99',
+      description: 'Select a value between 1 and 99',
+      name: 'MY_PARAM',
+      defaultValue: '1'
+    )
+  }
+  
+  
