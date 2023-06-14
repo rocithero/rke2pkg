@@ -11,3 +11,4 @@ spec:
             matchLabels:
               name: kube-system
 
+"networking.k8s.io/network-policy" = "test/allow-kube-system-to-test"
