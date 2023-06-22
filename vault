@@ -1,0 +1,16 @@
+
+```
+resource "null_resource" "private_key_conversion" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      openssl rsa -in ${path.module}/rsa_private_key.pem -outform der -out ${path.module}/rsa_private_key.der &&
+      openssl pkcs8 -topk8 -inform der -in ${path.module}/rsa_private_key.der -outform pem -nocrypt -out ${path.module}/pkcs8_private_key.pem
+    EOT
+  }
+
+  # Trigger the provisioner whenever the RSA private key file changes
+  triggers = {
+    private_key_file = filebase64sha256("${path.module}/rsa_private_key.pem")
+  }
+}
+```
