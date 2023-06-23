@@ -122,3 +122,31 @@ With this configuration, whenever the vault_pki_secret_backend_cert resource cha
 
 
 Regenerate
+
+
+
+## RECHECK 
+```
+resource "vault_pki_secret_backend_cert" "example_cert" {
+  # ... other configuration ...
+}
+
+data "vault_generic_secret" "private_key_data" {
+  path = "secret/path/to/private_key"
+}
+
+# Convert the private key to PKCS8 format using the `openssl` command
+data "external" "convert_private_key" {
+  program = ["openssl", "pkcs8", "-topk8", "-inform", "PEM", "-outform", "PEM", "-nocrypt"]
+
+  # Use the private key data retrieved from Vault
+  query = {
+    private_key = data.vault_generic_secret.private_key_data.data["private_key"]
+  }
+
+  # Trigger the data resource when the version of the certificate changes
+  triggers = {
+    cert_version = vault_pki_secret_backend_cert.example_cert.version
+  }
+}
+```
