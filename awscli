@@ -1,0 +1,1 @@
+aws iam detach-group-policy --group-name <group-name> --policy-arn <policy-arn>
